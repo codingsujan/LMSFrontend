@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+      <title>3D Image Gallery with HTML, CSS3 and jQuery</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+      <meta name="description" content="3D Image Gallery with HTML, CSS3 and jQuery" />
+      <meta name="keywords" content="3d, image gallery, jquery, css3, auto, slideshow, navigate, mouse scroll" />
+      <meta name="author" content="HTMLCSS3TUTORIALS" />
+      <link rel="stylesheet" type="text/css" href="css/slider.css" />
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      
+      <link rel="stylesheet" type="text/css" href="css/home1.css" />
+  <script type="text/javascript" src="js/modernizr.custom.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+  <div class="container">
+    <header>
+      <h1><span>Library Management System</span></h1>
+    </header>
+    </div>
+    <div class="topnav" id="myTopnav">
+        
+      <a href="AddBooks.html" class="active">Home</a>
+      <a href="books.html">Books information</a>
+      <a href="books1.html">View Requests</a>
+      <a href="contact1.html">Contact</a>
+      <a href="login.html">Logout</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+
+      <div class="container" >
+        <header>
+          <h1><span><table align="center">
+            <thead>
+              <th>S.No.</th><th>Book id</th><th>Book Name</th><th>Author Name</th><th>Volume</th><th>No.of Copies avaliable</th>
+            </thead>
+            <tbody id="tbody1">
+              <tr></tr>
+            </tbody>
+    
+          </table></span></h1>
+        </header>
+        </div>
+      
+      <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+      </script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC63N1Rz6rOcplbE2Hnk8smyOcteU9saRM",
+    authDomain: "lmss-192b4.firebaseapp.com",
+    databaseURL: "https://lmss-192b4-default-rtdb.firebaseio.com",
+    projectId: "lmss-192b4",
+    storageBucket: "lmss-192b4.appspot.com",
+    messagingSenderId: "41162709731",
+    appId: "1:41162709731:web:5619975bba1133a0f343d6"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  import {getDatabase,ref,get,set,child,update,remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+  const db=getDatabase();
+
+var stdNo=0;
+var tbody=document.getElementById('tbody1');
+
+function AddItemToTable(BookId,BookName,BookAuthor,BookVolume,BookCopiesCount)
+{
+
+  let trow=document.createElement("tr");
+  let td1=document.createElement("td");
+  let td2=document.createElement("td");
+  let td3=document.createElement("td");
+  let td4=document.createElement("td");
+  let td5=document.createElement("td");
+  let td6=document.createElement("td");
+  
+  td1.innerHTML=++stdNo;
+  td2.innerHTML=BookId;
+  td3.innerHTML=BookName;
+  td4.innerHTML=BookAuthor;
+  td5.innerHTML=BookVolume;
+  td6.innerHTML=BookCopiesCount;
+
+  trow.appendChild(td1);
+  trow.appendChild(td2);
+  trow.appendChild(td3);
+  trow.appendChild(td4);
+  trow.appendChild(td5);
+  trow.appendChild(td6);
+
+  tbody.appendChild(trow);
+}
+
+  function AddAllItemsToTable(TheStudent)
+  {
+    stdNo=0;
+    tbody.innerHTML="";
+    TheStudent.forEach(element=>{
+      AddItemToTable(element.BookId,element.BookName,element.BookAuthor,element.BookVolume,element.BookCopiesCount);
+    });
+  }
+
+  function GetAllDataOnce()
+  {
+    const dbRef=ref(db);
+    get(child(dbRef,"The Books"))
+    .then((snapshot)=>{
+      var students=[];
+      snapshot.forEach(childSnapshot=>{
+        students.push(childSnapshot.val());
+      });
+      AddAllItemsToTable(students);
+    });
+  }
+  window.onload=GetAllDataOnce;
+
+</script>
+
+    
+</body>
+</html>

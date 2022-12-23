@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+      <title>3D Image Gallery with HTML, CSS3 and jQuery</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+      <meta name="description" content="3D Image Gallery with HTML, CSS3 and jQuery" />
+      <meta name="keywords" content="3d, image gallery, jquery, css3, auto, slideshow, navigate, mouse scroll" />
+      <meta name="author" content="HTMLCSS3TUTORIALS" />
+      <link rel="stylesheet" type="text/css" href="css/slider.css" />
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      
+      <link rel="stylesheet" type="text/css" href="css/home1.css" />
+  <script type="text/javascript" src="js/modernizr.custom.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+      window.history.forward();
+  }
+</script>
+</head>
+<body>
+  
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+  </style>
+  <div class="container">
+    <header>
+      <h1><span>Library Management System</span></h1>
+    </header>
+    </div>
+    <div class="topnav" id="myTopnav">
+        
+        <a href="index.html" class="active">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="Register.html">Send suggestion for books</a>
+        <a href="login.html">User SignUp/SignIn</a>
+        <a href="AdminLogin.html">Admin Login</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+
+      <div class="container" >
+        <header>
+          <h1>Admin Login</h1>
+          <h1><span>
+            <table align="center"  >
+            <tbody>
+              <tr><td>Enter admin id : </td><td><input type="text" id="email" name="email" placeholder="Enter admin id" height="true" width="true" required="true"></td></tr>
+              <tr><td>Enter Password   : </td><td><input type="password" id="password" name="password" placeholder="Enter Password" required=""></td></tr>
+              <tr><td><button type="button" id="register"  onclick="loginValidation()" class="button1">Login</button></td><td><button type="reset" id="login" name="login" class="button1">Reset</button></td></tr>
+            </tbody>
+    
+          </table>
+        </span></h1>
+        <h2>Note : Admin Login Page</h2>
+        </header>
+        </div>
+        <script>
+            function loginValidation()
+            {
+              var user=document.getElementById("email").value;
+              var pswd=document.getElementById("password").value;
+              if(user=="admin"&&pswd=="admin@123")
+              {
+                window.close();
+                window.open("AddBooks.html")
+              }
+              else
+              {
+                alert("Invalid  id and Password")
+              }
+  
+            }
+  
+          </script>   
+</body>
+</html>

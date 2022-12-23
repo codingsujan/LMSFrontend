@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+      <title>3D Image Gallery with HTML, CSS3 and jQuery</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+      <meta name="description" content="3D Image Gallery with HTML, CSS3 and jQuery" />
+      <meta name="keywords" content="3d, image gallery, jquery, css3, auto, slideshow, navigate, mouse scroll" />
+      <meta name="author" content="HTMLCSS3TUTORIALS" />
+      <link rel="stylesheet" type="text/css" href="css/slider.css" />
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      
+      <link rel="stylesheet" type="text/css" href="css/home1.css" />
+  <script type="text/javascript" src="js/modernizr.custom.js"></script>  
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+    <script type="text/javascript">
+      window.history.forward();
+      function noBack() {
+          window.history.forward();
+      }
+  </script>
+</head>
+<body>
+    
+  <div class="container">
+    <header>
+      <h1><span>Library Management System</span></h1>
+    </header>
+    </div>
+    <div class="topnav" id="myTopnav">
+        
+        <a href="HomeUser.html" class="active">Home</a>
+        <a href="ubooks.html">Books information</a>
+        <a href="Register1.html">Send Requests</a>
+        <a href="uViewRequtes.html">View Requests</a>
+        <a href="contact2.html">Contact</a>
+        <a href="index.html">Logout</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+
+      <div class="container" >
+        <header>
+          
+          <h1><span><table align="center"  >
+            <h1>send suggestion for adding new books in library</h1>
+            <tbody>
+              <tr><td>Enter Book id   : </td><td><input type="text" id="bid"  placeholder="Enter book id" required></td></tr>
+              <tr><td>Enter Book Name : </td><td><input type="text" id="bname" placeholder="Enter book name" required></td></tr>
+              <tr><td>Enter Author Name     : </td><td><input type="text" id="bauthor" placeholder="Enter author Name" required></td></tr>
+              <tr><td>Enter Volume : </td><td><input type="text" id="bvolume" placeholder="Enter volume" required></td></tr>
+              <tr><td>Enter Number of Copies   : </td><td><input type="text" id="bcopies" placeholder="Enter number of copies" required></td></tr>
+              <tr><td><button id="sub" class="button1">Register</button></td><td><button id="reset" class="button1">Reset</button></td></tr>
+            </tbody>
+    
+          </table></span></h1>
+        </header>
+    </div>
+ <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC63N1Rz6rOcplbE2Hnk8smyOcteU9saRM",
+      authDomain: "lmss-192b4.firebaseapp.com",
+      databaseURL: "https://lmss-192b4-default-rtdb.firebaseio.com",
+      projectId: "lmss-192b4",
+      storageBucket: "lmss-192b4.appspot.com",
+      messagingSenderId: "41162709731",
+      appId: "1:41162709731:web:5619975bba1133a0f343d6"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    import {getDatabase,ref,set,get,child,update,remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+    const db=getDatabase();
+
+    var bid=document.getElementById('bid');
+    var bname=document.getElementById('bname');
+    var bauthor=document.getElementById('bauthor');
+    var bvolume=document.getElementById('bvolume');
+    var bcopies=document.getElementById('bcopies');
+
+    var insBtn=document.getElementById('sub');
+    function InsertData()
+    {
+
+        const dbRef=ref(db);
+        get(child(dbRef,"Registrations/"+bid.value)).then((snapshot)=>{
+            if(snapshot.exists())
+            {
+                alert("Book id already exists");
+            }
+            else
+            {
+                set(ref(db, "Registrations/"+ bid.value),{
+            UserId : bid.value,
+            Password : bname.value,
+            UserName : bauthor.value,
+            UserEmail : bvolume.value,
+            UserMobileNo : bcopies.value
+
+        }).then(()=>{
+            alert("Request sent successfully");
+            window.location.reload();
+        }).catch((error)=>{
+            alert("Request failed" +error)
+        });     
+            }
+        })
+
+
+        
+    }
+    insBtn.addEventListener('click',InsertData);
+
+ </script> 
+</body>
+</html>
